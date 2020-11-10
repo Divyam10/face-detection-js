@@ -128,6 +128,6 @@
 
             } 
            }
-        setTimeout(draw,250,video,context,width,height);
+        setTimeout(draw,1000/33,video,context,width,height);
     }
 })();
