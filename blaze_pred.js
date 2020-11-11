@@ -6,7 +6,7 @@
     navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     
     navigator.getMedia({
-        video:{height:480,width:640},
+        video:{height:230,width:230},
         audio:false
     }, function(stream){
         video.srcObject = stream;
@@ -18,7 +18,7 @@
     video.addEventListener('play',function()
                           {
 
-        draw(this, context,640,480);
+        draw(this, context,230,230);
     },false);
     
     async function draw(video,context, width, height)
