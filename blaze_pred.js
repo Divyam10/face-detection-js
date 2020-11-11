@@ -6,7 +6,7 @@
     navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     
     navigator.getMedia({
-        video:{height:230,width:230},
+        video:{height:480,width:640},
         audio:false
     }, function(stream){
         video.srcObject = stream;
@@ -18,7 +18,7 @@
     video.addEventListener('play',function()
                           {
 
-        draw(this, context,230,230);
+        draw(this, context,640,480);
     },false);
     
     async function draw(video,context, width, height)
@@ -50,7 +50,7 @@
            var bbox_height  = end[1] - start[1];
            const bbox_delta = (bbox_height - bbox_width) / 2;
             if (bbox_height > bbox_width){
-                // console.log(1)
+                console.log(1)
                 if ((bbox_0 - bbox_delta) < 0){
                 // crop = face[bbox[1]:bbox[3], 0:bbox[2] + bbox[0], :]};
                     var x = 0;
@@ -60,14 +60,14 @@
             }
                 else if ((bbox_2 + bbox_delta) >= width){
                 // crop = face[bbox[1]:bbox[3], bbox[0] - (face.shape[1] - bbox[2]):(face.shape[1] - 1), :]}
-                // console.log(2)
+                console.log(2)
                     var x =  bbox_0 + (height - bbox_2);
                     var y = bbox_1;
                     bbox_width = height-1 - x ;
                     bbox_height = bbox_3 - y;
             }
                 else{
-                    // console.log(3)
+                    console.log(3)
                 // crop = face[bbox[1]:bbox[3], bbox[0] - bbox_delta:bbox[2] + bbox_delta, :]}}
                     var x = bbox_0  +  bbox_delta;
                     var y = bbox_1 - 1;
@@ -75,14 +75,14 @@
                     bbox_height = bbox_3 - y;
             }}else if(bbox_height < bbox_width){
                 if ((bbox_1-bbox_delta) < 0){
-                    // console.log(4)
+                    console.log(4)
                     // crop = face[0:bbox[3]+bbox[1], bbox[0]:bbox[2], :]}
                     var x = bbox_0; 
                     var y = 0;
                     bbox_width = bbox_2 - x; 
                     bbox_height = bbox_3+bbox_1 - y;
                 }else if (((bbox_3+bbox_delta) >= width)){
-                    // console.log(5)
+                    console.log(5)
                 // crop = face[bbox[1]-(bbox[3]-face.shape[0]):(face.shape[0]-1), bbox[0]:bbox[2], :]}
                     var x = bbox_0;
                     var y = bbox_1-(bbox_3-width);
@@ -90,14 +90,14 @@
                     bbox_height = (width-1) - y;
                 }else{
                 // crop = face[bbox[1]-bbox_delta:bbox[3]+bbox_delta, bbox[0]:bbox[2], :]}
-                // console.log(6)
+                console.log(6)
                     var x = bbox_0;
                     var y = bbox_1+bbox_delta;
                     bbox_width = bbox_2 - x;
                     bbox_height = bbox_3-bbox_delta - y;
             }}else{
             // crop = face[bbox[1]:bbox[3], bbox[0]:bbox[2], :]}}
-            // console.log(7)
+            console.log(7)
                 var x = bbox_0; 
                 var y = bbox_1;
                 bbox_width = bbox_2 - x; 
@@ -105,7 +105,7 @@
             }
             // console.log((bbox_width*bbox_height)/(width*height))
            // Render a rectangle over each detected face.
-        //    console.log((bbox_width*bbox_height)/(width*height))
+           console.log((bbox_width*bbox_height)/(width*height))
            if ((bbox_width*bbox_height)/(width*height)>=0.2 & (bbox_width*bbox_height)/(height*width)<= 0.65){
            
            const landmarks  = predictions[i].landmarks
@@ -149,4 +149,4 @@
            }
         setTimeout(draw,1000/30,video,context,width,height);
     }
-})();
+})()
