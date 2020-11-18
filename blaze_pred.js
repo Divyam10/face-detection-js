@@ -30,9 +30,11 @@
         context.drawImage(video,0,0,width,height);
         const model = await blazeface.load();
         const returnTensors = false;
-        const predictions = await model.estimateFaces(video, returnTensors);
         var m = Date.now();
         console.log('loading model:' ,m-n)
+        const predictions = await model.estimateFaces(video, returnTensors);
+        
+        
 
           if (predictions.length > 0)
           {
